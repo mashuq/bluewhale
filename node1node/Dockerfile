@@ -1,8 +1,12 @@
+# Getting Nodejs v11
 FROM node:11
-# Create app directory
+# Creating app directory
 WORKDIR /usr/src/app
-# Copy Application
+# Copying Application
 COPY node ./
+# Getting node libraries
 RUN npm install
-EXPOSE 3000
+# Exposing Port
+EXPOSE 80
+# Running App
 CMD [ "npm", "start" ]
