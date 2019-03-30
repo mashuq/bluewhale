@@ -69,3 +69,24 @@ sudo docker push mashuqrahman/repository:node2spring
 
 #Run from any machine
 sudo docker run -p 8002:8080 mashuqrahman/repository:node2spring
+
+
+## To run the docker swarm
+
+#Login to docker hub
+sudo docker login
+
+#Init the swarm
+sudo docker swarm init
+
+#Deploy the stack
+sudo docker stack deploy -c docker-compose.yml bluewhale
+
+#View stack status
+sudo docker service ls
+
+#View detailed stack status
+sudo docker service ps bluewhale_web --no-trunc
+
+#Leave the swarm
+sudo docker swarm leave --force

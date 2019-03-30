@@ -1,0 +1,32 @@
+version: "3"
+services:
+  node1:
+    image: mashuqrahman/repository:node1node
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8001:8080"
+    networks:
+      - webnet
+  node2:
+    image: mashuqrahman/repository:node2spring
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8002:8080"
+    networks:
+      - webnet
+networks:
+  webnet:
