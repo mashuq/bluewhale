@@ -7,6 +7,6 @@ COPY node ./
 # Getting node libraries
 RUN npm install
 # Exposing Port
-EXPOSE 80
+EXPOSE 8080
 # Running App
 CMD [ "npm", "start" ]
