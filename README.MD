@@ -119,3 +119,45 @@
 
 ### View the stack status
 > `docker stack ps bluewhale`
+
+
+# Running kubernetes
+
+### Either Intall and start kubernetes cluster using Kubeadm 
+
+> `wget https://github.com/kubernetes-sigs/kubeadm-dind-cluster/releases/download/v0.1.0/dind-cluster-v1.13.sh`
+
+> `chmod +x dind-cluster-v1.13.sh`
+
+> `sudo ./dind-cluster-v1.13.sh up`
+
+### Or Intall and start kubernetes cluster using minikube 
+> `curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube`
+
+> `minikube start`
+
+### View Nodes
+> `sudo kubectl get nodes`
+
+### Deploy node1node
+> `sudo kubectl run node1node --image=mashuqrahman/repository:node1node --port=8080`
+
+### View Deployments
+> `sudo kubectl get deployments`
+
+### Run proxy in another terminal
+> `sudo kubectl proxy`
+
+### Get the pod name
+> `sudo kubectl get pods`
+
+### Access the application frontend
+> `curl http://localhost:8001/api/v1/namespaces/default/pods/<Pod Name>/proxy/`
+
+### Access the appication runtime
+> `sudo kubectl exec <Pod Name> env`
+
+> `sudo kubectl -ti exec <Pod Name> bash`
+
+> `curl localhost:8080`
+
