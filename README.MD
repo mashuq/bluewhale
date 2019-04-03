@@ -134,7 +134,7 @@
 ### Or Intall and start kubernetes cluster using minikube 
 > `curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube`
 
-> `minikube start`
+> `sudo minikube start`
 
 ### View Nodes
 > `sudo kubectl get nodes`
@@ -161,3 +161,26 @@
 
 > `curl localhost:8080`
 
+### View existing services
+> `sudo kubectl get services`
+
+### Create a new service and expose it to external traffic
+> `sudo kubectl expose deployment/node1node --type="NodePort" --port 8080`
+
+### View newly created service
+> `sudo kubectl get services`
+
+### View service details
+> `sudo kubectl describe services/node1node`
+
+### Access application
+> `curl http://<minkube or kubeadm-dind host>:<service port>`
+
+### Access application if using minikube
+> `sudo minikube service node1node`
+
+### Scale deployment to 4 pods
+> `sudo kubectl scale deployments/node1node --replicas=4`
+
+### View replicated pods
+> `sudo kubectl get pods`
