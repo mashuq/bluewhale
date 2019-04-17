@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring
+      istio-injection: enabled
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: spring
+        istio-injection: enabled
+    spec:
+      containers:
+      - name: spring
+        image: mashuqrahman/repository:node2spring
+        ports:
+        - containerPort: 8080
+          name: http

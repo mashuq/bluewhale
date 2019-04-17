@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node      
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: node
+        istio-injection: enabled
+    spec:
+      containers:
+      - name: node
+        image: mashuqrahman/repository:node1node
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
