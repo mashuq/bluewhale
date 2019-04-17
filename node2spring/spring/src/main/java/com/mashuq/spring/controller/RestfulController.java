@@ -1,5 +1,8 @@
 package com.mashuq.spring.controller;
 
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -9,15 +12,19 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @RestController
 public class RestfulController {
 
     private String hostName;
+    Logger logger = LoggerFactory.getLogger(RestfulController.class);
+    Gson gson;
 
     public RestfulController() {
         try {
             InetAddress ip = InetAddress.getLocalHost();
             hostName = ip.getHostName();
+            gson = new Gson();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -30,6 +37,7 @@ public class RestfulController {
         map.put("app", "java spring");
         map.put("host", hostName);
         map.put("node", getNodeData());
+        logger.info(gson.toJson(map));
         return map;
     }
 
@@ -38,19 +46,20 @@ public class RestfulController {
         Map map = new HashMap();
         map.put("response", "data from java spring");
         map.put("host", hostName);
+        logger.info(gson.toJson(map));
         return map;
     }
 
 
-    private static String getNodeData() {
-        final String uri = "http://node:8080/data/";
+    private String getNodeData() {
+        final String uri = "http://node-service:8080/data/";
 
         RestTemplate restTemplate = new RestTemplate();
         String result = null;
         try {
             result = restTemplate.getForObject(uri, String.class);
         }catch (Exception ex){
-            ex.printStackTrace();
+            logger.error(ex.getLocalizedMessage(), ex);
         }
         return result;
     }

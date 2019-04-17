@@ -5,6 +5,16 @@ const axios = require('axios');
 const { closeSync, openSync, readdirSync } = require('fs');
 const dataDir = './data/';
 const uuidv4 = require('uuid/v4');
+const winston = require('winston');
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/info.log' })
+  ]
+});
 
 /* GET home page. */
 router.get('/data/', async function (req, res, next) {
@@ -19,20 +29,24 @@ router.get('/', async function (req, res, next) {
   let uuid = uuidv4();
   touch(uuid);
   try {
-    const spring = await axios.get('http://spring:8080/data/');
-    res.json({
+    const spring = await axios.get('http://spring-service:8080/data/');
+    let response = {
       app: 'node express',
       host: os.hostname(),
-      spring: spring,
+      spring: spring.data,
       number: number(dataDir),
-    });
+    };
+    logger.info(response);
+    res.json(response);    
   } catch (e) {
-    res.json({
+    logger.error(e);
+    let response = {
       app: 'node express',
       host: os.hostname(),
-      spring: null,
       number: number(dataDir),
-    });
+    };
+    logger.info(response);
+    res.json(response);
   }
 });
 
