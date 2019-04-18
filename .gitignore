@@ -10,4 +10,8 @@ target/
 
 *.iws
 
+*.log
+
 out/
+
+node1node/node/data/
