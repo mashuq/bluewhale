@@ -1,10 +1,10 @@
 # For First Node : Nodejs Application
 
 ### Building first node
-> `sudo docker build -t node1node node1node/`
+> `sudo docker build -t node3python node3python/`
 
 ### Running first node on port 8080
-> `sudo docker run -p 8080:8080 -d node1node`
+> `sudo docker run -p 8080:8080 -d node3python`
 
 ### Testing first node
 > `curl -i localhost:8080`
@@ -25,10 +25,10 @@
 > `sudo docker login`
 
 ### Tag the image
-> `sudo docker tag node1node mashuqrahman/repository:node1node`
+> `sudo docker tag node3python mashuqrahman/repository:node3python`
 
 ### Push the image
-> `sudo docker push mashuqrahman/repository:node1node`
+> `sudo docker push mashuqrahman/repository:node3python`
 
 ### Run from any machine
-> `sudo docker run -p 8080:8080 mashuqrahman/repository:node1node`
+> `sudo docker run -p 8080:8080 mashuqrahman/repository:node3python`

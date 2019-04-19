@@ -3,11 +3,11 @@
 ### Building second node
 > `sudo docker build -t node2spring node2spring/`
 
-### Running second node on port 8002
-> `sudo docker run -p 8002:8080 -d node2spring`
+### Running second node on port 8080
+> `sudo docker run -p 8080:8080 -d node2spring`
 
 ### Testing second node
-> `curl -i localhost:8002`
+> `curl -i localhost:8080`
 
 ### Viewing second node run details
 > `sudo docker ps`
@@ -31,4 +31,4 @@
 > `sudo docker push mashuqrahman/repository:node2spring`
 
 ### Run from any machine
-> `sudo docker run -p 8002:8080 mashuqrahman/repository:node2spring`
+> `sudo docker run -p 8080:8080 mashuqrahman/repository:node2spring`
