@@ -14,4 +14,6 @@ target/
 
 out/
 
+*.pyc
+
 node1node/node/data/

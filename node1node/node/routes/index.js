@@ -30,11 +30,13 @@ router.get('/', async function (req, res, next) {
   touch(uuid);
   try {
     const spring = await axios.get('http://spring-service:8080/data/');
+    const python = await axios.get('http://externalpython-service:8080/data');
     let response = {
       app: 'node express',
       host: os.hostname(),
       spring: spring.data,
       number: number(dataDir),
+      python: python.data,
     };
     logger.info(response);
     res.json(response);    

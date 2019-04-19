@@ -1,0 +1,10 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: externalpython-service
+subsets:
+ - addresses:
+     - ip: 10.0.0.110
+   ports:
+     - port: 8080
+

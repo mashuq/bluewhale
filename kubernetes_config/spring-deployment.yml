@@ -18,6 +18,7 @@ spec:
       containers:
       - name: spring
         image: mashuqrahman/repository:node2spring
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           name: http
