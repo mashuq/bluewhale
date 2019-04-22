@@ -1,0 +1,24 @@
+# kind: Endpoints
+# apiVersion: v1
+# metadata:
+#  name: externalphp-service
+# subsets:
+#  - addresses:
+#      - ip: 192.168.99.1
+#    ports:
+#      - port: 8181
+
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: externalphp-service
+spec:
+  hosts:
+  - dummy
+  addresses:
+  - 192.168.99.1
+  ports:
+  - number: 8181
+    name: http
+    protocol: HTTP
+  location: MESH_EXTERNAL

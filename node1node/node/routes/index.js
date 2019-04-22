@@ -28,28 +28,35 @@ router.get('/data/', async function (req, res, next) {
 router.get('/', async function (req, res, next) {
   let uuid = uuidv4();
   touch(uuid);
+  let response = {
+    app: 'node express',
+    host: os.hostname(),
+    number: number(dataDir),
+  };
   try {
     const spring = await axios.get('http://spring-service:8080/data/');
-    const python = await axios.get('http://externalpython-service:8080/data');
-    let response = {
-      app: 'node express',
-      host: os.hostname(),
-      spring: spring.data,
-      number: number(dataDir),
-      python: python.data,
-    };
-    logger.info(response);
-    res.json(response);    
+    response.spring = spring.data;
   } catch (e) {
     logger.error(e);
-    let response = {
-      app: 'node express',
-      host: os.hostname(),
-      number: number(dataDir),
-    };
-    logger.info(response);
-    res.json(response);
+    response.spring = {};
   }
+  try {
+    const python = await axios.get('http://externalpython-service:8080/data');
+    response.python = python.data;
+  } catch (e) {
+    logger.error(e);
+    response.python = {};
+  }
+  try {
+    const php = await axios.get('http://externalphp-service:8181/data');
+    response.php = php.data;
+  } catch (e) {
+    logger.error(e);
+    response.php = {};
+  }
+  logger.info(response);
+  res.json(response);
+
 });
 
 const touch = filename => closeSync(openSync(dataDir + filename, 'w'));
