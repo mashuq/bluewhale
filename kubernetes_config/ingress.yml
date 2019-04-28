@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target:  /
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /node
+          backend:
+            serviceName: node-service
+            servicePort: 8080
+        - path: /spring
+          backend:
+            serviceName: spring-service
+            servicePort: 8080  
+        - path: /python
+          backend:
+            serviceName: externalpython-service
+            servicePort: 8080  
+        - path: /php
+          backend:
+            serviceName: externalphp-service
+            servicePort: 8181

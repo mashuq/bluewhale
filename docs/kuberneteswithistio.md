@@ -14,6 +14,10 @@
 ### Configure Istio into kubernetes
 `for i in install/kubernetes/helm/istio-init/files/crd*yaml; do sudo kubectl apply -f $i; done`
 
+`sudo kubectl apply -f install/kubernetes/istio-demo-auth.yaml`
+ 
+### OR
+
 `sudo kubectl apply -f install/kubernetes/istio-demo.yaml`
 ### Check istio installation
 `sudo kubectl get svc -n istio-system`
